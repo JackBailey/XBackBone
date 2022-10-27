@@ -84,11 +84,14 @@ class UserRepository
      * @param  int  $copyRaw
      * @return bool|\PDOStatement|string
      */
-    public function create(string $email, string $username, string $password = null, int $isAdmin = 0, int $isActive = 0, int $maxUserQuota = -1, string $activateToken = null, int $ldap = 0, int $hideUploads = 0, int $copyRaw = 0)
+    public function create(string $email, string $username, string $password = null, string $userCode, int $isAdmin = 0, int $isActive = 0, int $maxUserQuota = -1, string $activateToken = null, int $ldap = 0, int $hideUploads = 0, int $copyRaw = 0)
     {
-        do {
-            $userCode = humanRandomString(5);
-        } while ($this->database->query('SELECT COUNT(*) AS `count` FROM `users` WHERE `user_code` = ?', $userCode)->fetch()->count > 0);
+        if (empty($userCode)) {
+            do {
+                $userCode = humanRandomString(5);
+            } while ($this->database->query('SELECT COUNT(*) AS `count` FROM `users` WHERE `user_code` = ?', $userCode)->fetch()->count > 0);
+        }
+
 
         $token = $this->generateUserUploadToken();
 

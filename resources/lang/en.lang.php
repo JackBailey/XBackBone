@@ -71,6 +71,7 @@ return [
     'username_required' => 'The username is required.',
     'username_taken' => 'The username is already taken.',
     'password_required' => 'The password is required.',
+    'user_code_taken' => 'The user code is already taken'
     'user_created' => 'User "%s" created!',
     'user_updated' => 'User "%s" updated!',
     'profile_updated' => 'Profile updated successfully!',

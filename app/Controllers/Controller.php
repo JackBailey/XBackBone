@@ -150,5 +150,6 @@ abstract class Controller
             ->alertIf(!filter_var(param($request, 'email'), FILTER_VALIDATE_EMAIL), 'email_required')
             ->alertIf($this->database->query('SELECT COUNT(*) AS `count` FROM `users` WHERE `email` = ?', param($request, 'email'))->fetch()->count != 0, 'email_taken')
             ->alertIf($this->database->query('SELECT COUNT(*) AS `count` FROM `users` WHERE `username` = ?', param($request, 'username'))->fetch()->count != 0, 'username_taken');
+            ->alertIf($this->database->query('SELECT COUNT(*) AS `count` FROM `users` WHERE `user_code` = ?', param($request, 'userCode'))->fetch()->count != 0, 'user_code_taken');
     }
 }
